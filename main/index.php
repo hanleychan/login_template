@@ -18,6 +18,12 @@ include_once("../includes/layouts/header.php");
 
 <div id="content">
     <h3>Main Page</h3>
+    <?php
+        $message = Session::getMessage();
+        if($message) {
+        	echo "<p>". htmlentities($message) . "</p>";
+        }
+    ?>
     <p>Hello <?php echo $username; ?></p>
     <p><a href="../logout">Logout</a></p>
 </div>

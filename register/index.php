@@ -41,12 +41,18 @@ if(isset($_POST["submit"])) {
     <p><a href="../login">Login here</a></p>
     <h3>Create Account</h3>
     <?php
+        $message = Session::getMessage();
+        if($message) {
+        	echo "<p>". htmlentities($message) . "</p>";
+        }
+    
         if(isset($errors)) {
             for($count=0;$count<count($errors);$count++) {
                 echo "<p>" . $errors[$count] . "</p>";
             }
         }
     ?>
+    
     <form action="" method="post">
         <label for="username">Username</label><br>
         <input type="text" id="username" name="username" value=""><br>

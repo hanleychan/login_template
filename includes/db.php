@@ -1,7 +1,7 @@
 <?php
 define("DB_SERVER", "localhost");
 define("DB_USER", "root");
-define("DB_PASS", "");
+define("DB_PASS", "apple");
 define("DB_NAME", "login");
 
 class MySqlDatabase {

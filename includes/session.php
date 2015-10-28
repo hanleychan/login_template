@@ -1,0 +1,59 @@
+<?php
+class Session {
+	private $logged_in = false;
+	public $user_id;
+	
+	function __construct() {
+		session_start();
+		$this->check_login();
+	}
+	
+	public function is_logged_in() {
+		return $this->logged_in;
+	}
+	
+	public function login($user) {
+		if($user) {
+			$this->user_id = $_SESSION['user_id'] = $user->id;
+			$this->logged_in = true;
+		}
+	}
+	
+	public function logout() {
+		unset($_SESSION['user_id']);
+		unset($this->user_id);
+		$this->logged_in = false;
+	}
+	
+	private function check_login() {
+		if(isset($_SESSION['user_id'])) {
+			$this->user_id=$_SESSION['user_id'];
+			$this->logged_in = true;
+		}
+		else {
+			unset($this->user_id);
+			$this->logged_in = false;
+		}
+	}
+	
+	public static function getMessage() {
+		if(!empty($_SESSION['message'])) {
+			$message = $_SESSION['message'];
+			$_SESSION['message'] = null;
+
+			return $message;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public static function setMessage($message="") {
+		$_SESSION['message'] = $message;
+	}
+}
+
+$session = new Session();
+
+
+?>

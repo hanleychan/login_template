@@ -15,6 +15,7 @@ if(isset($_POST["submit"])) {
     	$user = User::authenticate($username, $password);
     	if($user) {
     		$session->login($user);
+		Logger::log("User: " . $user->username . " has logged in");
     		header("Location: ../main");
     	}
     	else {
@@ -30,7 +31,7 @@ if(isset($_POST["submit"])) {
     <p><a href="../register">+ Create account</a></p>
     <h3>Login</h3>
     <?php
-    	   $message = Session::getMessage();
+    	$message = Session::getMessage();
         if($message) {
         	echo "<p>". htmlentities($message) . "</p>";
         }

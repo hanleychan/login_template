@@ -29,7 +29,9 @@ if(isset($_POST["submit"])) {
     if(empty($errors)) {
     		$result = User::addUser($username, $password);
     		Session::setMessage("You have successfully registered");
+		Logger::log("User: " . htmlentities($username) . " has registered");
     		header("Location: ../");
+		exit;
     }
 }
 ?>
@@ -41,6 +43,7 @@ if(isset($_POST["submit"])) {
     <p><a href="../login">Login here</a></p>
     <h3>Create Account</h3>
     <?php
+
         $message = Session::getMessage();
         if($message) {
         	echo "<p>". htmlentities($message) . "</p>";

@@ -40,7 +40,16 @@ class MySqlDatabase {
 	public function fetch_array($result_set) {
 		return $result_set-> fetch_assoc();
 	}
+	
+	public function insert_id() {
+		return $this->connection->insert_id;
+	}
+	
+	public function affected_rows() {
+		return $this->connection->affected_rows;
+	}
 }
+
 
 $database = new MySqlDatabase();
 

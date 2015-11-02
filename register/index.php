@@ -27,7 +27,12 @@ if(isset($_POST["submit"])) {
 
     // No errors.  Create the user
     if(empty($errors)) {
-    		$result = User::addUser($username, $password);
+    		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    		$user = new User();
+    		$user->username=$username;
+    		$user->password=$hashed_password;
+    		$user->save();
+    		
     		Session::setMessage("You have successfully registered");
 		Logger::log("User: " . htmlentities($username) . " has registered");
     		header("Location: ../");

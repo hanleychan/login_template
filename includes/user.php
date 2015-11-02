@@ -13,6 +13,7 @@ class User extends DatabaseObject {
 	public $username;
 	public $password;
 	protected static $table_name = "users";
+	protected static $db_fields=array('id','username','password');
 	
 	public static function authenticate($username, $password) {
 		global $database;
@@ -33,16 +34,7 @@ class User extends DatabaseObject {
 			return false;
 		}
 	}
-	
-	public static function addUser($username, $password) {
-		global $database;
-		$username = $database->escape_string($username);
-		$password = $database->escape_string($password);
-		$hashed_pw = password_hash($password, PASSWORD_DEFAULT);
 		
-		$result = $database->query("INSERT INTO users (username, password) VALUES ('{$username}', '{$hashed_pw}')");
-	}
-	
 	public static function validatePassword($password, $passwordConfirm) {
         if(empty($password)) {
             $errors[] = "Your password can not be blank";
